@@ -1,13 +1,17 @@
 import tkinter as tk
-from tkinter import messagebox, simpledialog, ttk
+from tkinter import messagebox, ttk
 import json
 import time
 import os
 import requests
 import uuid
 
-UTENTI_FILE = 'utenti.json'
-CODICI_USATI = 'codici_usati.json'
+# Cartella nascosta nella home dell'utente (es. ~/.rilevapresenza)
+APP_DIR = os.path.join(os.path.expanduser('~'), '.rilevapresenza')
+os.makedirs(APP_DIR, exist_ok=True)
+
+UTENTI_FILE = os.path.join(APP_DIR, 'utenti.json')
+CODICI_USATI = os.path.join(APP_DIR, 'codici_usati.json')
 API_URL = 'https://gestionedidattica.unipd.it/PresenzeStudentiNew/api/TimbratureApi.php'
 
 
@@ -19,7 +23,7 @@ def carica_utenti():
                 selez_val = utente.get('selezionato', False)
                 utente['selezionato'] = tk.BooleanVar(value=selez_val)
             return utenti
-    return []  # FIX: era "break" (non valido fuori da un loop)
+    return []
 
 
 def salva_utenti(utenti):
@@ -39,7 +43,7 @@ def salva_codice_usato(codice_lezione):
         with open(CODICI_USATI, 'r') as f:
             try:
                 data = json.load(f)
-            except json.JSONDecodeError:  # FIX: except era fuori dal try
+            except json.JSONDecodeError:
                 data = []
     data.append({'codice_lezione': codice_lezione, 'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')})
     with open(CODICI_USATI, 'w') as f:
@@ -68,7 +72,7 @@ def invia_presenza(codice_lezione, utenti, log_callback):
                 log_callback(f"[OK] {utente['codice_fiscale']} - {response.text.strip()}", 'ok')
                 continue
             log_callback(f"[ERRORE] {utente['codice_fiscale']} - HTTP {response.status_code}", 'errore')
-        except Exception as e:  # FIX: except era fuori dall'indentazione del try
+        except Exception as e:
             log_callback(f"[EXCEPTION] {utente['codice_fiscale']} - {str(e)}", 'exception')
 
 
@@ -125,10 +129,8 @@ class App:
         for widget in self.checkbox_frame.winfo_children():
             widget.destroy()
         self.canvas.yview_moveto(0)
-
-        for item in self.lista_utenti.get_children():  # FIX: mancava il ciclo per pulire la lista
+        for item in self.lista_utenti.get_children():
             self.lista_utenti.delete(item)
-
         for i, utente in enumerate(self.utenti):
             val = utente['selezionato']
             val = tk.BooleanVar(value=val) if not isinstance(val, tk.BooleanVar) else val
@@ -149,7 +151,6 @@ class App:
         self.log.delete('1.0', 'end')
 
     def aggiungi_utente(self):
-        # FIX: erano stati scambiati i nomi delle variabili (self, finestra, entry)
         finestra = tk.Toplevel(self.root)
         finestra.title('Aggiungi Utente')
 
@@ -192,12 +193,11 @@ class App:
             return None
         item = selezione[0]
         values = self.lista_utenti.item(item, 'values')
-        cf = values[0]  # FIX: era "self = values[0]"
-        utente = next((u for u in self.utenti if u['codice_fiscale'] == cf), None)  # FIX: variabile corretta
+        cf = values[0]
+        utente = next((u for u in self.utenti if u['codice_fiscale'] == cf), None)
         if not utente:
             return None
 
-        # FIX: erano scambiate tutte le variabili (cf_entry, posto_entry, finestra, ecc.)
         finestra = tk.Toplevel(self.root)
         finestra.title('Modifica Utente')
 
