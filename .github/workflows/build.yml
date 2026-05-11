@@ -26,7 +26,7 @@ jobs:
 
       - name: Build .exe
         run: |
-          pyinstaller --onefile --windowed --hidden-import=requests --name="RilevaPresenza" RILEVAPRESENZA_PC_UNIPD.py
+          pyinstaller --onefile --windowed --hidden-import=requests --icon=icona.ico --name="RilevaPresenza" RILEVAPRESENZA_PC_UNIPD.py
 
       - name: Carica artefatto
         uses: actions/upload-artifact@v4
@@ -51,7 +51,7 @@ jobs:
 
       - name: Build .app (ARM64)
         run: |
-          pyinstaller --onefile --windowed --hidden-import=requests --name="RilevaPresenza" RILEVAPRESENZA_PC_UNIPD.py
+          pyinstaller --onefile --windowed --hidden-import=requests --icon=icona.icns --name="RilevaPresenza" RILEVAPRESENZA_PC_UNIPD.py
 
       - name: Zip del .app
         run: |
@@ -81,7 +81,7 @@ jobs:
 
       - name: Build .app (Intel)
         run: |
-          pyinstaller --onefile --windowed --hidden-import=requests --name="RilevaPresenza" RILEVAPRESENZA_PC_UNIPD.py
+          pyinstaller --onefile --windowed --hidden-import=requests --icon=icona.icns --name="RilevaPresenza" RILEVAPRESENZA_PC_UNIPD.py
 
       - name: Zip del .app
         run: |
