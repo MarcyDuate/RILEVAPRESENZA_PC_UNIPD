@@ -1,4 +1,4 @@
-Progetto nato per sopperire alla mancanza di un'applicazione della suite EasyStaff per PC.
+Progetto nato per sopperire alla mancanza di un'applicazione per rilevare la presenza nella suite EasyStaff per PC.
 In questa versione inoltre è possibile: 
 - timbrare la presenza per più utenti contemporaneamente
 - avere un log dei codici utilizzati al percorso "C:\Users\xxx\.rilevapresenza\codici_usati.json"
