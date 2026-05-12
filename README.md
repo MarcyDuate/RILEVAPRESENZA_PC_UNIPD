@@ -1,5 +1,5 @@
-Progetto nato per sopperire alla mancanza di un'applicazione per rilevare la presenza nella suite EasyStaff per PC.
-In questa versione inoltre è possibile: 
-- timbrare la presenza per più utenti contemporaneamente
-- avere un log dei codici utilizzati al percorso "C:\Users\xxx\.rilevapresenza\codici_usati.json"
-- non condividere la posizione dell'utente al momento della timbratura
+Project created to address the lack of a desktop application for attendance tracking in the EasyStaff suite. This version also allows you to:
+
+clock in attendance for multiple users simultaneously
+keep a log of the codes used at the path C:\Users\xxx\.rilevapresenza\codici_usati.json
+avoid sharing the user's location at the time of clock-in
