@@ -6,12 +6,12 @@ import os
 import requests
 import uuid
 
-# Cartella nascosta nella home dell'utente (es. ~/.rilevapresenza)
 APP_DIR = os.path.join(os.path.expanduser('~'), '.rilevapresenza')
 os.makedirs(APP_DIR, exist_ok=True)
 
 UTENTI_FILE = os.path.join(APP_DIR, 'utenti.json')
 CODICI_USATI = os.path.join(APP_DIR, 'codici_usati.json')
+#CHANGE THIS URL FOR OTHER UNIVERSITY#
 API_URL = 'https://gestionedidattica.unipd.it/PresenzeStudentiNew/api/TimbratureApi.php'
 
 
