@@ -1,4 +1,4 @@
-Project created to address the lack of a desktop application for attendance tracking in the EasyStaff suite.
+Project created to address the lack of a desktop application for attendance tracking in the EasyStaff suite for UNIPD.
 
 This version also allows you to:
 
